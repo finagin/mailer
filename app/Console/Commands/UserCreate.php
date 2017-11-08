@@ -60,10 +60,10 @@ class UserCreate extends Command
             return false;
         }
 
-        $user = User::firstOrCreate([
+        $user = User::updateOrCreate([
             'name' => $name,
             'email' => $email,
-        ], [
+            ], [
                 'password' => $password,
             ]);
 
