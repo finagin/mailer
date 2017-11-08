@@ -4,6 +4,24 @@
 [![Build Status][ico-travis]][link-travis]
 [![StyleCI][ico-styleci]][link-styleci]
 
+* [Installation](#installation)
+	* [Development](#development)
+
+## Installation
+### Development
+* Клонировать репозитарий
+* Установить **Php 7.1** ```brew install php71```
+* Установить **Composer** ```brew install composer```
+* Создать конфиг ```cp .env.exmaple .env```
+* Установить **Mysql** ```brew install mysql```
+* Установить **Valet** ```composer global require laravel/valet```
+* Запустить в папке проекта ```composer install --no-scripts --no-interaction```
+* Запустить миграции ```php artisan migrate```
+* Установить глобальные зависимости ```npm install -g gulp yarn```
+* Установить локальные зависимости в папке ```yarn```
+* Собрать фронт ```npm run watch```
+* Подключить **Valet** ```valet link website```
+
 ## License
 
 The MIT License ([MIT](https://opensource.org/licenses/MIT)). Please see [License File](LICENSE) for more information.
