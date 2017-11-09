@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\v1\Mail\PlatformaLP as RequestPlatformaLP;
-use App\Http\Requests\Api\v1\Mail\Send as RequestSend;
-use App\Jobs\Api\v1\Mail\Send;
 use Exception;
+use App\Jobs\Api\v1\Mail\Send;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\v1\Mail\Send as RequestSend;
+use App\Http\Requests\Api\v1\Mail\PlatformaLP as RequestPlatformaLP;
 
 class MailController extends Controller
 {
@@ -38,16 +38,16 @@ class MailController extends Controller
 
             Send::dispatch([
                 'from' => 'no-reply@'.$host,
-                'to' => env('BLASTINGRF_MAIL','spam@finag.in'),
+                'to' => env('BLASTINGRF_MAIL', 'spam@finag.in'),
                 'subject' => 'Заявка с сайта '.$site,
                 'body' => $body,
             ]);
 
             return response()
                 ->json([
-                    "result" => 1,
-                    "time" => time(),
-                    "msg" => $request->input('form.msg'),
+                    'result' => 1,
+                    'time' => time(),
+                    'msg' => $request->input('form.msg'),
                 ])
                 ->withCallback(request()->input('callback'));
         } catch (Exception $e) {
