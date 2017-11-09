@@ -61,10 +61,10 @@ class UserCreate extends Command
         }
 
         $user = User::updateOrCreate([
-            'name' => $name,
-            'email' => $email,
+                'email' => $email,
             ], [
-                'password' => $password,
+                'name' => $name,
+                'password' => bcrypt($password),
             ]);
 
         $this->info('The user with name "'.$user->name.'" and e-mail "'.$user->email.'" is created!');
