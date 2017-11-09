@@ -15,10 +15,15 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+})->name('user');
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'mail', 'as' => 'mail.'], function () {
-    Route::group(['middleware' => 'scopes:mail-sand', 'prefix' => 'send', 'as' => 'send'], function () {
-        Route::post('', 'Api\v1\MailController@send');
+Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
+    Route::group(['prefix' => 'mail', 'as' => 'mail.'], function () {
+        Route::group(['middleware' => 'scopes:mail-sand', 'prefix' => 'send', 'as' => 'send'], function () {
+            Route::post('', 'Api\v1\MailController@send');
+        });
+        Route::group(['prefix' => 'platformalp', 'as' => 'platformalp'], function () {
+            Route::get('', 'Api\v1\MailController@platformalp');
+        });
     });
 });
