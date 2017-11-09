@@ -1,0 +1,107 @@
+
+// Fonts
+@import "~raleway-cyrillic/raleway.css";
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+//
+// Variables
+@import "variables";
+//
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  $navbar-indentation: $navbar-height + 20px;
+  margin-bottom: $navbar-indentation;
+  padding-top: $navbar-indentation;
+}
+
+.dropdown-menu > li > a > i.fa {
+  margin: 0 0 0 -10px;
+}
+
+.panel {
+  .panel-heading {
+    .breadcrumb {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border-radius: 0;
+    }
+  }
+  .panel-body {
+    .text-center {
+      .pagination {
+        margin-top: 0;
+        margin-bottom: -6px;
+      }
+    }
+  }
+}
+
+.table {
+
+  tr {
+    & > th,
+    & > td {
+      &.actions {
+        > a {
+          opacity: 0;
+          @include transition(.25s .5s);
+        }
+      }
+    }
+    &:focus,
+    &:hover {
+      & > th,
+      & > td {
+        &.actions {
+          > a {
+            opacity: .85;
+            @include transition(.5s .1s);
+          }
+        }
+      }
+    }
+  }
+
+  &-numbered {
+    & > thead,
+    & > tbody,
+    & > tfoot {
+      & > tr {
+        & > th,
+        & > td {
+          &:first-child {
+            width: 1px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Set the fixed height of the footer here */
+  height: $navbar-height;
+  line-height: $navbar-height; /* Vertically center the text there */
+  border-top: 1px solid $laravel-border-color;
+  background-color: $navbar-default-bg;
+}
