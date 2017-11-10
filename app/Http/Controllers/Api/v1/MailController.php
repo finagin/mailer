@@ -30,7 +30,7 @@ class MailController extends Controller
         try {
             $body = '';
             foreach ($request->input('fields') as $field) {
-                $body .= $field['name'].': '.($field['value']??'').'<br>';
+                $body .= $field['name'].': '.($field['value'] ?? '').'<br>';
             }
 
             $host = parse_url($_SERVER['HTTP_REFERER'] ?? $_SERVER['HTTP_HOST'], PHP_URL_HOST) ? '' : 'platformalp.ru';
