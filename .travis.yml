@@ -5,6 +5,7 @@ php:
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `travis-ci`;'
+  - ssh -o StrictHostKeyChecking=no $DEPLOY_SERVER;
 
 before_deploy:
   - composer global require "laravel/envoy=~1.0";
