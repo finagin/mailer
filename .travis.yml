@@ -24,10 +24,10 @@ before_deploy:
   - sed -i -e "s/{{ *DEPLOY_USERNAME *}}/${DEPLOY_USERNAME}/g" ${TRAVIS_BUILD_DIR}/storage/deploy/config;
   - cp ${TRAVIS_BUILD_DIR}/storage/deploy/config ~/.ssh/;
   - openssl aes-256-cbc -K ${!ENCRYPT_KEY} -iv ${!ENCRYPT_VI} -in ${TRAVIS_BUILD_DIR}/storage/deploy/deploy_rsa.enc -out ~/.ssh/deploy_rsa -d;
-  - ls -GlaF ~/.ssh
-  - cat ~/.ssh/config
   - chmod 600 ${HOME}/.ssh/deploy_rsa;
   - chmod 644 ${HOME}/.ssh/authorized_keys
+  - ls -GlaF ~/.ssh
+  - cat ~/.ssh/config
   - composer global require "laravel/envoy=~1.0";
   - export PATH=$PATH:$HOME/.composer/vendor/bin;
   - echo $PATH;
