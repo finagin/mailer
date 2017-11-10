@@ -7,8 +7,8 @@ services:
   - mysql
 
 before_install:
-  - echo $PWD;
-  - ./storage/deploy/script.sh
+  - cd $TRAVIS_BUILD_DIR
+  - sh storage/deploy/script.sh
 
 before_script:
   - cp .env.travis .env
