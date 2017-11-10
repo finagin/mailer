@@ -7,7 +7,7 @@ services:
   - mysql
 
 before_install:
-  - sh ${TRAVIS_BUILD_DIR}/storage/deploy/script.sh
+  - $TRAVIS_BUILD_DIR/storage/deploy/script.sh
 
 before_script:
   - cp .env.travis .env
