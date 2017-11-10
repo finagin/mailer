@@ -34,6 +34,10 @@ class Send implements ShouldQueue
      */
     public function handle()
     {
+        if (isset($this->values['driver'])) {
+            config(['mail.driver' => $this->values['driver']]);
+        }
+
         Mail::send(new MailSend($this->values));
     }
 }
