@@ -1,0 +1,5 @@
+Host {{ DEPLOY_SERVER }}
+	Hostname				{{ DEPLOY_HOSTNAME }}
+	User					{{ DEPLOY_USERNAME }}
+	IdentityFile			~/.ssh/deploy_rsa
+	StrictHostKeyChecking	no

@@ -3,27 +3,11 @@ language: php
 php:
   - 7.1
 
+services:
+  - mysql
+
 before_install:
-  - openssl aes-256-cbc -K $encrypted_97588c8af04b_key -iv $encrypted_97588c8af04b_iv -in storage/deploy_rsa.enc -out /tmp/deploy_rsa -d
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS `travis-ci`;'
-  - ssh -o StrictHostKeyChecking=no $DEPLOY_SERVER;
-
-before_deploy:
-  - composer global require "laravel/envoy=~1.0";
-  - eval "$(ssh-agent -s)"
-  - chmod 600 /tmp/deploy_rsa
-  - ssh-add /tmp/deploy_rsa
-  - export PATH=$PATH:$HOME/.composer/vendor/bin;
-  - echo $PATH;
-  - which envoy;
-  - cd $TRAVIS_BUILD_DIR && envoy run deploy;
-
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: storage/deploy.sh
-    on:
-      branch: master
+  - sh ${TRAVIS_BUILD_DIR}/storage/deploy/script.sh
 
 before_script:
   - cp .env.travis .env
@@ -34,5 +18,16 @@ before_script:
 
 script: vendor/bin/phpunit
 
-services:
-  - mysql
+before_deploy:
+  - composer global require "laravel/envoy=~1.0";
+  - export PATH=$PATH:$HOME/.composer/vendor/bin;
+  - echo $PATH;
+  - which envoy;
+  - cd $TRAVIS_BUILD_DIR && envoy run deploy;
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: echo "DEPLOY SUCCESS!!"
+    on:
+      branch: master
