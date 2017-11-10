@@ -6,11 +6,9 @@ php:
 services:
   - mysql
 
-before_install:
+before_script:
   - cd $TRAVIS_BUILD_DIR
   - sh storage/deploy/script.sh
-
-before_script:
   - cp .env.travis .env
   - composer self-update
   - composer install --prefer-source --no-interaction
