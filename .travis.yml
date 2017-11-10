@@ -19,7 +19,7 @@ before_script:
 script: vendor/bin/phpunit
 
 before_deploy:
-  - storage/deploy/script.sh
+  - cd $TRAVIS_BUILD_DIR && storage/deploy/script.sh
   - composer global require "laravel/envoy=~1.0";
   - export PATH=$PATH:$HOME/.composer/vendor/bin;
   - echo $PATH;
