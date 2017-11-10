@@ -13,7 +13,7 @@ before_deploy:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
   - if [ $(! echo "$PATH" | grep -q "$HOME/.composer/vendor/bin") ]; then export PATH=$PATH:$HOME/.composer/vendor/bin; fi;
-  - exho $PATH;
+  - echo $PATH;
   - cd $TRAVIS_BUILD_DIR && envoy run deploy;
 
 deploy:
