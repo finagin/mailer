@@ -14,5 +14,3 @@ sed -i -e "s/{{ *DEPLOY_USERNAME *}}/${DEPLOY_USERNAME}/g" ${TRAVIS_BUILD_DIR}/s
 cp ${TRAVIS_BUILD_DIR}/storage/deploy/config ~/.ssh/;
 
 openssl aes-256-cbc -K ${!ENCRYPT_KEY} -iv ${!ENCRYPT_VI} -in ${TRAVIS_BUILD_DIR}/storage/deploy/deploy_rsa.enc -out ~/.ssh/deploy_rsa -d;
-
-mysql -e 'CREATE DATABASE IF NOT EXISTS `travis-ci`;'

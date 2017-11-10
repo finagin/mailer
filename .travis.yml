@@ -6,6 +6,9 @@ php:
 services:
   - mysql
 
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS `travis-ci`;'
+
 before_script:
   - cp .env.travis .env
   - composer self-update
@@ -16,7 +19,7 @@ before_script:
 script: vendor/bin/phpunit
 
 before_deploy:
-  - sh storage/deploy/script.sh
+  - storage/deploy/script.sh
   - composer global require "laravel/envoy=~1.0";
   - export PATH=$PATH:$HOME/.composer/vendor/bin;
   - echo $PATH;
