@@ -30,10 +30,10 @@ class MailController extends Controller
         try {
             $body = '';
             foreach ($request->input('fields') as $field) {
-                $body .= $field['name'].': '.$field['value'].'<br>';
+                $body .= $field['name'].': '.($field['value']??'').'<br>';
             }
 
-            $host = parse_url($_SERVER['HTTP_REFERER'] ?? $_SERVER['HTTP_HOST'], PHP_URL_HOST);
+            $host = parse_url($_SERVER['HTTP_REFERER'] ?? $_SERVER['HTTP_HOST'], PHP_URL_HOST) ? '' : 'platformalp.ru';
             $site = parse_url($_SERVER['HTTP_REFERER'] ?? '', PHP_URL_HOST) ?? '';
 
             Send::dispatch([
@@ -41,6 +41,7 @@ class MailController extends Controller
                 'to' => env('BLASTINGRF_MAIL', 'spam@finag.in'),
                 'subject' => 'Заявка с сайта '.$site,
                 'body' => $body,
+                'driver' => 'sendmail',
             ]);
 
             return response()
