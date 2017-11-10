@@ -7,8 +7,6 @@ services:
   - mysql
 
 before_script:
-  - cd $TRAVIS_BUILD_DIR
-  - sh storage/deploy/script.sh
   - cp .env.travis .env
   - composer self-update
   - composer install --prefer-source --no-interaction
@@ -18,6 +16,7 @@ before_script:
 script: vendor/bin/phpunit
 
 before_deploy:
+  - sh storage/deploy/script.sh
   - composer global require "laravel/envoy=~1.0";
   - export PATH=$PATH:$HOME/.composer/vendor/bin;
   - echo $PATH;
