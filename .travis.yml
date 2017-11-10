@@ -25,7 +25,7 @@ before_deploy:
   - cp ${TRAVIS_BUILD_DIR}/storage/deploy/config ~/.ssh/;
   - openssl aes-256-cbc -K ${!ENCRYPT_KEY} -iv ${!ENCRYPT_VI} -in ${TRAVIS_BUILD_DIR}/storage/deploy/deploy_rsa.enc -out ~/.ssh/deploy_rsa -d;
   - ls -GlaF ~/.ssh
-  - cat ~/.ssh config
+  - cat ~/.ssh/config
   - chmod 600 ~/.ssh/deploy_rsa;
   - composer global require "laravel/envoy=~1.0";
   - export PATH=$PATH:$HOME/.composer/vendor/bin;
