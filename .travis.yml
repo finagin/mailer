@@ -13,11 +13,7 @@ before_install:
 deploy:
   - provider: script
     skip_cleanup: true
-    script:
-      - composer global require "laravel/envoy=~1.0";
-      - if ! echo "$PATH" | grep -q "~/.composer/vendor/bin"; then export PATH=$PATH:~/.composer/vendor/bin; fi;
-      - cd $TRAVIS_BUILD_DIR;
-      - envoy run deply;
+    script: storage/deploy.sh
     on:
       branch: master
 
