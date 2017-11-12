@@ -9,20 +9,21 @@ services:
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS `travis-ci`;'
 
-before_script:
-  - cp .env.travis .env
-  - composer self-update
-  - composer install --prefer-source --no-interaction
-  - php artisan key:generate
-  - php artisan migrate --force --no-interaction
-
-script: vendor/bin/phpunit
+#before_script:
+#  - cp .env.travis .env
+#  - composer self-update
+#  - composer install --prefer-source --no-interaction
+#  - php artisan key:generate
+#  - php artisan migrate --force --no-interaction
+#
+#script: vendor/bin/phpunit
 
 before_deploy:
   - sed -i -e "s/{{ *DEPLOY_SERVER *}}/${DEPLOY_SERVER}/g" ${TRAVIS_BUILD_DIR}/storage/deploy/config;
   - sed -i -e "s/{{ *DEPLOY_HOSTNAME *}}/${DEPLOY_HOSTNAME}/g" ${TRAVIS_BUILD_DIR}/storage/deploy/config;
   - sed -i -e "s/{{ *DEPLOY_USERNAME *}}/${DEPLOY_USERNAME}/g" ${TRAVIS_BUILD_DIR}/storage/deploy/config;
   - cp ${TRAVIS_BUILD_DIR}/storage/deploy/config ~/.ssh/;
+  - cat ~/.ssh/;
   - openssl aes-256-cbc -K ${!ENCRYPT_KEY} -iv ${!ENCRYPT_VI} -in ${TRAVIS_BUILD_DIR}/storage/deploy/deploy_rsa.enc -out ~/.ssh/deploy_rsa -d;
   - chmod 600 ${HOME}/.ssh/deploy_rsa;
   - chmod 600 ${HOME}/.ssh/authorized_keys
